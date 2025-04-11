@@ -1,60 +1,149 @@
 <script setup>
 import { ref } from "vue";
 
-let firstNumber = ref();
-let secondNumber = ref();
-let operator = ref("+");
-let result = ref();
-let resultText = ref("");
+let input = ref();
+/* const add = "+"
+const minus = "-"
+const subtract = "-"
+const divide = "/"
+const one = 1
+const two = 2
+const three = 3
+const four = 4
+const five = 5
+const six = 6
+const seven = 7
+const eight = 8
+const nine = 9
+const zero = 0 */
 
-const calculate = () => {
-  if(operator.value === "+"){
-    result.value = parseFloat(firstNumber.value) + parseFloat(secondNumber.value)
-    resultText.value = "Result: " + result.value
-  }if(operator.value === "-"){
-    result.value = parseFloat(firstNumber.value) - parseFloat(secondNumber.value)
-    resultText.value = "Result: " + result.value
-  }if(operator.value === "*"){
-    result.value = parseFloat(firstNumber.value) * parseFloat(secondNumber.value)
-    resultText.value = "Result: " + result.value
-  }if(operator.value === "%"){
-    result.value = parseFloat(firstNumber.value) % parseFloat(secondNumber.value)
-    resultText.value = "Result: " + result.value
+function appendValue(val) {
+  input.value += val;
+}
+
+function evaluate() {
+  try {
+    input.value = eval(input.value);
+  } catch (err) {
+    result.value = "Error";
   }
-};
+}
+
+function clear() {
+  input.value = "";
+}
 </script>
 
 <template>
-  <div class="bg-black min-h-screen w-screen">
+  <div class="bg-black min-h-screen">
     <div class="flex justify-center">
-      <div class="border border-white p-5 bg-white space-y-5">
-        <h1 class="text-2xl text-center">Online Calculator</h1>
-        <form @submit.prevent class="flex flex-wrap flex-row gap-4">
+      <div class="">
+        <form @submit.prevent>
           <input
             type="text"
-            v-model="firstNumber"
-            class="border"
-            placeholder="Enter a number"
+            v-model="input"
+            readonly
+            class="border w-full h-28 mb-5 text-3xl bg-white rounded-xl"
           />
-          <select v-model="operator" id="operator" class="border">
-            <option value="+" selected>+</option>
-            <option value="-">-</option>
-            <option value="*">*</option>
-            <option value="%">%</option>
-          </select>
-          <input
-            type="text"
-            v-model="secondNumber"
-            class="border"
-            placeholder="Enter a number"
-          />
-          <button class="px-4 py-2 bg-blue-500 text-white cursor-pointer" @click="calculate">
-            Calculate
-          </button>
+          <div class="grid grid-cols-4 justify-items-center gap-y-3">
+            <button
+              @click="appendValue('+')"
+              class="rounded-full size-20 bg-gray-300 text-3xl"
+            >
+              +
+            </button>
+            <button
+              @click="appendValue('7')"
+              class="rounded-full size-20 bg-gray-300 text-3xl"
+            >
+              7
+            </button>
+            <button
+              @click="appendValue('8')"
+              class="rounded-full size-20 bg-gray-300 text-3xl"
+            >
+              8
+            </button>
+            <button
+              @click="appendValue('9')"
+              class="rounded-full size-20 bg-gray-300 text-3xl"
+            >
+              9
+            </button>
+            <button
+              @click="appendValue('-')"
+              class="rounded-full size-20 bg-gray-300 text-3xl"
+            >
+              -
+            </button>
+            <button
+              @click="appendValue('4')"
+              class="rounded-full size-20 bg-gray-300 text-3xl"
+            >
+              4
+            </button>
+            <button
+              @click="appendValue('5')"
+              class="rounded-full size-20 bg-gray-300 text-3xl"
+            >
+              5
+            </button>
+            <button
+              @click="appendValue('6')"
+              class="rounded-full size-20 bg-gray-300 text-3xl"
+            >
+              6
+            </button>
+            <button
+              @click="appendValue('*')"
+              class="rounded-full size-20 bg-gray-300 text-3xl"
+            >
+              *
+            </button>
+            <button
+              @click="appendValue('1')"
+              class="rounded-full size-20 bg-gray-300 text-3xl"
+            >
+              1
+            </button>
+            <button
+              @click="appendValue('2')"
+              class="rounded-full size-20 bg-gray-300 text-3xl"
+            >
+              2
+            </button>
+            <button
+              @click="appendValue('3')"
+              class="rounded-full size-20 bg-gray-300 text-3xl"
+            >
+              3
+            </button>
+            <button
+              @click="appendValue('/')"
+              class="rounded-full size-20 bg-gray-300 text-3xl"
+            >
+              /
+            </button>
+            <button
+              @click="appendValue('0')"
+              class="rounded-full size-20 bg-gray-300 text-3xl"
+            >
+              0
+            </button>
+            <button
+              @click="appendValue('.')"
+              class="rounded-full size-20 bg-gray-300 text-3xl"
+            >
+              .
+            </button>
+            <button @click="evaluate()" class="rounded-full size-20 bg-blue-400 text-3xl">
+              =
+            </button>
+            <button @click="clear()" class="rounded-full size-20 bg-gray-300 text-3xl">
+              C
+            </button>
+          </div>
         </form>
-        <p class="bg-green-300 text-center py-2" id="resultText">
-          {{ resultText ? resultText : 'Result will be displayed here' }}
-        </p>
       </div>
     </div>
   </div>

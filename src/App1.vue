@@ -38,7 +38,7 @@ const calculate = () => {
             readonly
           />
           <select v-model="operator" id="operator" class="border">
-            <option value="+" selected>+</option>
+            <option value="+" >+</option>
             <option value="-">-</option>
             <option value="*">*</option>
             <option value="/">/</option>
